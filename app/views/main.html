@@ -1,0 +1,59 @@
+<div class="jumbotron">
+  <h1>So much to do!</h1>
+  {{'hello' + ' world!'}}
+</div>
+
+
+
+<ul class="list-group">
+
+  <li class="list-group-item row">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <form ng-submit="submitTask()">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter a task..." ng-model="task.note">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="submitTask()">Add Task</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </li>
+
+  <li class="list-group-item row" ng-repeat="(index, task) in tasks">
+
+    <div class="col-md-1 col-xs-1">
+      <input type="checkbox" class="btn" ng-model="task.done" ng-change="saveTask(index, task)">
+    </div>
+
+    <div class="col-md-9 col-xs-9">
+      <div ng-class="{'strike': task.done}" ng-hide="task.editing" ng-dblclick="editTask(task)">
+        {{task.note}}
+      </div>
+      <input type="text" class="form-control" 
+        ng-show="task.editing" ng-model="task.note" ng-blur="doneEditTask(index, task)" 
+        autofocus />
+      <div>
+        <span ng-hide="task.done">
+          Created on: {{task.created}}
+        </span>
+        <span ng-show="task.done">
+          Finished on: {{task.finished}}
+        </span>
+      </div>
+    </div>
+
+
+    <div class="col-md-1 col-xs-1">
+      <span class="badge" ng-show="task.subtasks">{{getChildrenLength(task)}}</span>
+    </div>
+
+    <div class="col-md-1 col-xs-1">
+      <button class="btn btn-default btn-xs" type="button" ng-click="taskDetail(task.$id)">+</button>
+      <button class="btn btn-default btn-xs" type="button" ng-click="deleteTask(task)">&times;</button>
+    </div>
+
+  </li>
+</ul>

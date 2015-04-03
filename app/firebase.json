@@ -1,0 +1,9 @@
+{
+  "firebase": "somuchtodo",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
