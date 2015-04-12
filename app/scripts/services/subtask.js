@@ -1,17 +1,20 @@
 'use strict';
 
-app.factory('Subtask', function(FIREBASE_URL, $firebaseArray, $firebaseObject) {
-	var ref = new Firebase(FIREBASE_URL);
+app.factory('Subtask', function(FIREBASE_URL, $firebaseArray, $firebaseObject, Auth) {
+	var _ref = new Firebase(FIREBASE_URL);
 	var _taskid = '';
+	var _notebookid = '';
 	var _subtasks = null;
 	var _parent = null;
 	var _taskref = null;
 
 
 	var Subtask = {
-		setTaskId: function (taskid) {
+		setTaskId: function (notebookid, taskid) {
+			_notebookid = notebookid;
 			_taskid = taskid;
-			_taskref = ref.child('tasks').child(taskid);
+			var user = Auth.resolveUser();
+			_taskref = _ref.child('profile').child(user.uid).child('notebooks').child(_notebookid).child('tasks').child(_taskid);
 			_subtasks = $firebaseArray(_taskref.child('subtasks'));
 			_parent = $firebaseObject(_taskref);
 		},

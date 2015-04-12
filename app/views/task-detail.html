@@ -3,7 +3,7 @@
   <li class="list-group-item row" ng-repeat="(index, subtask) in subtasks">
     <input type="checkbox" class="btn btn-xs col-md-1 col-xs-1" ng-model="subtask.done" ng-change="subtasks.$save(index)">
     <div class="col-md-10 col-xs-10">
-      <div ng-class="{'strike': subtask.done}" ng-hide="subtask.editing" ng-dblclick="editSubtask(subtask)">
+      <div ng-class="{'strike': subtask.done}" ng-hide="subtask.editing" ng-dblclick="editSubtask(subtask)" focus-input>
         {{subtask.note}}
       </div>
       <input type="text" class="form-control" 

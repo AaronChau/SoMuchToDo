@@ -28,7 +28,11 @@ var app = angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/task/:taskid', {
+      .when('/notebook/:notebookid', {
+        templateUrl: 'views/notebook.html',
+        controller: 'NotebookCtrl'
+      })
+      .when('/notebook/:notebookid/:taskid', {
         templateUrl: 'views/task-detail.html',
         controller: 'TaskDetailCtrl'
       })

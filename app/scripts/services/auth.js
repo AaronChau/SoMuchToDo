@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Auth', function(FIREBASE_URL, $firebase, $firebaseAuth){
+app.factory('Auth', function(FIREBASE_URL, $firebaseArray, $firebaseObject, $firebaseAuth){
 	var _ref = new Firebase(FIREBASE_URL);
 	var _auth = $firebaseAuth(_ref);
 
@@ -21,13 +21,33 @@ app.factory('Auth', function(FIREBASE_URL, $firebase, $firebaseAuth){
 			return !!Auth.user.provider;
 		},
 		createProfile: function(user){
-			var profile = {
-				username: user.username,
-				md5hash: user.md5hash
-			};
+			var profileRef = $firebaseObject(_ref.child('profile').child(user.uid));
+			profileRef.username = user.username;
 
-			var profileRef = $firebase(_ref.child('profile'));
-			return profileRef.$set(user.uid, profile);
+			profileRef.$save().then(function(){
+				var notebooksRef = $firebaseArray(_ref.child('profile').child(user.uid).child('notebooks'));
+				var currentDate = new Date();
+				var firstNotebook = {
+					title: 'First Notebook!',
+					tasks: {
+						0: {
+							created: currentDate.toLocaleString(),
+							done: false,
+							editing: false,
+							note: 'Welcome to your first notebook!'
+						},
+						1: {
+							created: currentDate.toLocaleString(),
+							done: false,
+							editing: false,
+							note: 'Try to add, delete, edit (double click) or even add a subtask.'
+						}
+					}
+				};
+				notebooksRef.$add(firstNotebook);
+			});
+
+
 		},
 		user: {}
 	};

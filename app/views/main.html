@@ -3,57 +3,31 @@
   {{'hello' + ' world!'}}
 </div>
 
-
-
 <ul class="list-group">
-
   <li class="list-group-item row">
     <div class="row">
       <div class="col-md-12 col-xs-12">
-        <form ng-submit="submitTask()">
+        <form ng-submit="submitNotebook()">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Enter a task..." ng-model="task.note">
+            <input type="text" class="form-control" placeholder="Enter a new notebook!" ng-model="notebook.title" autofocus />
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button" ng-click="submitTask()">Add Task</button>
+              <button class="btn btn-default" type="button" ng-click="submitNotebook()">Add Notebook</button>
             </span>
           </div>
         </form>
       </div>
     </div>
   </li>
-
-  <li class="list-group-item row" ng-repeat="(index, task) in tasks">
-
-    <div class="col-md-1 col-xs-1">
-      <input type="checkbox" class="btn" ng-model="task.done" ng-change="saveTask(index, task)">
-    </div>
-
-    <div class="col-md-9 col-xs-9">
-      <div ng-class="{'strike': task.done}" ng-hide="task.editing" ng-dblclick="editTask(task)">
-        {{task.note}}
+  <li class="list-group-item row" ng-repeat="(index, notebook) in notebooks">
+    <div class="col-md-11 col-xs-11 noselect">
+      <div ng-hide="notebook.editing" sglclick="readNotebook(notebook.$id)" ng-dblclick="editNotebook($event, notebook)" focus-input>
+        {{notebook.title}}
       </div>
       <input type="text" class="form-control" 
-        ng-show="task.editing" ng-model="task.note" ng-blur="doneEditTask(index, task)" 
-        autofocus />
-      <div>
-        <span ng-hide="task.done">
-          Created on: {{task.created}}
-        </span>
-        <span ng-show="task.done">
-          Finished on: {{task.finished}}
-        </span>
-      </div>
+        ng-show="notebook.editing" ng-model="notebook.title" ng-blur="doneEditNotebook(index, notebook)" />
     </div>
-
-
     <div class="col-md-1 col-xs-1">
-      <span class="badge" ng-show="task.subtasks">{{getChildrenLength(task)}}</span>
+      <button class="btn btn-default btn-xs" type="button" ng-click="deleteNotebook(notebook)">&times;</button>
     </div>
-
-    <div class="col-md-1 col-xs-1">
-      <button class="btn btn-default btn-xs" type="button" ng-click="taskDetail(task.$id)">+</button>
-      <button class="btn btn-default btn-xs" type="button" ng-click="deleteTask(task)">&times;</button>
-    </div>
-
   </li>
 </ul>
