@@ -19,7 +19,7 @@
     </div>
   </li>
   <li class="list-group-item row" ng-repeat="(index, notebook) in notebooks">
-    <div class="col-md-11 col-xs-11 noselect">
+    <div class="col-md-11 col-xs-10 noselect">
       <div ng-hide="notebook.editing" sglclick="readNotebook(notebook.$id)" ng-dblclick="editNotebook($event, notebook)" focus-input>
         {{notebook.title}}
       </div>

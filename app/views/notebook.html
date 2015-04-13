@@ -28,7 +28,7 @@
     </div>
 
     <div class="col-md-9 col-xs-9 noselect">
-      <div ng-class="{'strike': task.done}" ng-hide="task.editing" ng-dblclick="editTask(task)" focus-input>
+      <div ng-class="{'strike': task.done}" ng-hide="task.editing" ng-dblclick="editTask(task)" sglclick="taskDetail(task.$id)" focus-input>
         {{task.note}}
       </div>
       <form ng-submit="doneEditTask(index, task)">

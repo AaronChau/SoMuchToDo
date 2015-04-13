@@ -1,5 +1,12 @@
 <ul class="list-group">
-  <li class="list-group-item row">{{task.note}}</li>
+  <li class="list-group-item row" ng-dblclick="editTask()" ng-show="!task.editing">{{task.note}}</li>
+  <li class="list-group-item row" ng-show="task.editing">
+    <form ng-submit="doneEditTask()">
+      <input type="text" class="form-control" 
+              ng-show="task.editing" ng-model="task.note" ng-blur="doneEditTask()" 
+              autofocus />
+    </form>  
+  </li>
   <li class="list-group-item row" ng-repeat="(index, subtask) in subtasks">
     <input type="checkbox" class="btn btn-xs col-md-1 col-xs-1" ng-model="subtask.done" ng-change="subtasks.$save(index)">
     <div class="col-md-10 col-xs-10 noselect">

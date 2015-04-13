@@ -24,4 +24,13 @@ app.controller('TaskDetailCtrl', function ($scope, $location, $routeParams, Subt
         subtask.editing = false;
         Subtask.save(index);
     };
+
+    $scope.editTask = function(){
+        $scope.task.editing = true;
+    };
+
+    $scope.doneEditTask = function(){
+        $scope.task.editing = false;
+        $scope.task.$save();
+    };
 });

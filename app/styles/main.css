@@ -1,3 +1,7 @@
+.list-group-item{
+  cursor: pointer;
+}
+
 .noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
