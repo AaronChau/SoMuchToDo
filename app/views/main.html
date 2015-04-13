@@ -3,7 +3,7 @@
   {{'hello' + ' world!'}}
 </div>
 
-<ul class="list-group">
+<ul class="list-group" ng-show="isAuthenticated()">
   <li class="list-group-item row">
     <div class="row">
       <div class="col-md-12 col-xs-12">
@@ -23,11 +23,17 @@
       <div ng-hide="notebook.editing" sglclick="readNotebook(notebook.$id)" ng-dblclick="editNotebook($event, notebook)" focus-input>
         {{notebook.title}}
       </div>
-      <input type="text" class="form-control" 
-        ng-show="notebook.editing" ng-model="notebook.title" ng-blur="doneEditNotebook(index, notebook)" />
+      <form ng-submit="doneEditNotebook(index, notebook)">
+        <input type="text" class="form-control" 
+          ng-show="notebook.editing" ng-model="notebook.title" ng-blur="doneEditNotebook(index, notebook)" />
+      </form>
     </div>
     <div class="col-md-1 col-xs-1">
       <button class="btn btn-default btn-xs" type="button" ng-click="deleteNotebook(notebook)">&times;</button>
     </div>
   </li>
 </ul>
+
+<div ng-show="!isAuthenticated()">
+
+</div>

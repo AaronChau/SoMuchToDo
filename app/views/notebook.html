@@ -11,7 +11,7 @@
       <div class="col-md-12 col-xs-12">
         <form ng-submit="submitTask()">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Enter a task..." ng-model="task.note">
+            <input type="text" class="form-control" placeholder="Enter a task..." ng-model="task.note" />
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" ng-click="submitTask()">Add Task</button>
             </span>
@@ -31,9 +31,11 @@
       <div ng-class="{'strike': task.done}" ng-hide="task.editing" ng-dblclick="editTask(task)" focus-input>
         {{task.note}}
       </div>
-      <input type="text" class="form-control" 
+      <form ng-submit="doneEditTask(index, task)">
+        <input type="text" class="form-control" 
         ng-show="task.editing" ng-model="task.note" ng-blur="doneEditTask(index, task)" 
         autofocus />
+      </form>
       <div>
         <span ng-hide="task.done">
           Created on: {{task.created}}

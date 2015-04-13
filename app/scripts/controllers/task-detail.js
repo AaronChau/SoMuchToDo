@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('TaskDetailCtrl', function ($scope, $routeParams, Subtask) {
+app.controller('TaskDetailCtrl', function ($scope, $location, $routeParams, Subtask) {
     Subtask.setTaskId($routeParams.notebookid, $routeParams.taskid);
     $scope.task = Subtask.parent();
     $scope.subtasks = Subtask.all();

@@ -14,9 +14,11 @@ app.factory('Subtask', function(FIREBASE_URL, $firebaseArray, $firebaseObject, A
 			_notebookid = notebookid;
 			_taskid = taskid;
 			var user = Auth.resolveUser();
-			_taskref = _ref.child('profile').child(user.uid).child('notebooks').child(_notebookid).child('tasks').child(_taskid);
-			_subtasks = $firebaseArray(_taskref.child('subtasks'));
-			_parent = $firebaseObject(_taskref);
+			if(user){
+				_taskref = _ref.child('profile').child(user.uid).child('notebooks').child(_notebookid).child('tasks').child(_taskid);
+				_subtasks = $firebaseArray(_taskref.child('subtasks'));
+				_parent = $firebaseObject(_taskref);
+			}
 		},
 		parent: function() {
 			return _parent;

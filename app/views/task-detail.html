@@ -2,13 +2,15 @@
   <li class="list-group-item row">{{task.note}}</li>
   <li class="list-group-item row" ng-repeat="(index, subtask) in subtasks">
     <input type="checkbox" class="btn btn-xs col-md-1 col-xs-1" ng-model="subtask.done" ng-change="subtasks.$save(index)">
-    <div class="col-md-10 col-xs-10">
+    <div class="col-md-10 col-xs-10 noselect">
       <div ng-class="{'strike': subtask.done}" ng-hide="subtask.editing" ng-dblclick="editSubtask(subtask)" focus-input>
         {{subtask.note}}
       </div>
-      <input type="text" class="form-control" 
-        ng-show="subtask.editing" ng-model="subtask.note" ng-blur="doneEditSubtask(index, subtask)" 
-        autofocus />
+      <form ng-submit="doneEditSubtask(index, subtask)">
+        <input type="text" class="form-control" 
+                ng-show="subtask.editing" ng-model="subtask.note" ng-blur="doneEditSubtask(index, subtask)" 
+                autofocus />
+      </form>
     </div>
     <button class="btn btn-default btn-xs col-md-1 col-xs-1" type="button" ng-click="deleteSubtask(subtask)">&times;</button>
   </li>
@@ -18,7 +20,7 @@
       <div class="col-lg-12">
         <form ng-submit="submitSubtask()">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Enter a subtask..." ng-model="subtask.note">
+            <input type="text" class="form-control" placeholder="Enter a subtask..." ng-model="subtask.note" />
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" ng-click="submitSubtask()">Add Subtask</button>
             </span>

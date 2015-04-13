@@ -1,9 +1,7 @@
 'use strict';
 
-app.factory('Notebook', function(FIREBASE_URL, $firebaseArray, Auth) {
-	var _ref = new Firebase(FIREBASE_URL);
-	var _notebookRef = _ref.child('profile/' + Auth.resolveUser().uid + '/notebooks');
-	var _notebooks = $firebaseArray(_notebookRef);
+app.factory('Notebook', function(Auth) {
+	var _notebooks = Auth.user.notebooks;
 
 	var Notebook = {
 		all: function(){

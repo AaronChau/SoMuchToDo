@@ -22,6 +22,27 @@ var app = angular
     'firebase'
   ])
   .constant('FIREBASE_URL', 'https://somuchtodo.firebaseio.com/')
+  .run(function ($rootScope, $location, Auth){
+    var routesThatDontRequireAuth = ['/', '/login', '/register', '/about'];
+
+    // check current location matches route
+    var routeClean = function(route){
+      var clean = false;
+      angular.forEach(routesThatDontRequireAuth, function(value){
+        if(route === value){
+          clean = true;
+        }
+      });
+      return clean;
+    };
+
+    $rootScope.$on('$routeChangeStart', function(){
+      if(!routeClean($location.url()) && !Auth.resolveUser()){
+        $location.path('/login');
+      }
+    });
+
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
