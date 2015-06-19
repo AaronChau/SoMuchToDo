@@ -1,11 +1,11 @@
 'use strict';
 
-app.controller('NotebookCtrl', function ($scope,  $location, $routeParams, $firebaseObject, Task, Notebook) {
+app.controller('NotebookCtrl', function ($scope,  $location, $routeParams, $firebaseObject, Task, User) {
     $scope.notebookId = $routeParams.notebookid;
     Task.setNotebookId($scope.notebookId);
     $scope.tasks = Task.tasks();
 
-    Notebook.all().$loaded().then(function(notebooks){
+    User.Notebook.all().$loaded().then(function(notebooks){
         $scope.notebook = notebooks.$getRecord($scope.notebookId);
     }).catch(function(error){
         console.log('Error:', error);
@@ -49,7 +49,7 @@ app.controller('NotebookCtrl', function ($scope,  $location, $routeParams, $fire
 
     $scope.doneEditNotebook = function(){
         $scope.notebook.editing = false;
-        Notebook.save($scope.notebook);
+        User.Notebook.save($scope.notebook);
     };
 
     $scope.taskDetail = function(taskId){

@@ -23,7 +23,7 @@ var app = angular
   ])
   .constant('FIREBASE_URL', 'https://somuchtodo.firebaseio.com/')
   .run(function ($rootScope, $location, Auth){
-    var routesThatDontRequireAuth = ['/', '/login', '/register', '/about'];
+    var routesThatDontRequireAuth = ['', '/', '/login', '/register', '/about'];
 
     // check current location matches route
     var routeClean = function(route){

@@ -56,8 +56,6 @@ app.factory('Auth', function(FIREBASE_URL, $firebaseArray, $firebaseObject, $fir
 		if (authData) {
 			console.log('User ' + authData.uid + ' is logged in with ' + authData.provider);
 			angular.copy(authData, Auth.user);
-			Auth.user.profile = $firebaseObject(_ref.child('profile').child(Auth.user.uid));
-			Auth.user.notebooks = $firebaseArray(_ref.child('profile').child(Auth.user.uid).child('notebooks'));
 		} else {
 			console.log('User is logged out');
 			angular.copy({}, Auth.user);
