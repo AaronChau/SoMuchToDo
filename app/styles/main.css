@@ -1,3 +1,22 @@
+.float-right {
+  float: right;
+}
+
+.filterActive {
+
+}
+
+.notebook-title{ 
+  display: inline-block;
+  width: 85%;
+}
+
+.filters {
+  display: inline-block;
+  width: 14%;
+  vertical-align: top;
+}
+
 .list-group-item{
   cursor: pointer;
 }

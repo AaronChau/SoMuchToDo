@@ -1,5 +1,26 @@
+
 <ul class="list-group">
-  <li class="list-group-item row" ng-dblclick="editNotebook()" ng-show="!notebook.editing">{{notebook.title}}</li>
+  <li class="list-group-item row" ng-dblclick="editNotebook()" ng-show="!notebook.editing">
+    <div class="notebook-title">
+      {{notebook.title}}
+    </div>
+    <div class="filters btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Filter by: <span class="caret"></span>
+      </button>
+   <!--    <select ng-model="filterItem.filter" ng-options="item.name for item in filterOptions.filters">
+      </select>  -->
+      <ul class="dropdown-menu">
+        <li ng-repeat="filter in filterOptions.filters">
+          <a ng-click="changeFilter(filter.id)" class="">{{filter.name}} <span class="float-right" ng-class="{'glyphicon glyphicon-ok': filterItem.filter.id == filter.id}"></span></a>
+        </li>
+       <!--  <li><a ng-click="changeFilter(1)" ng-class="{'filterActive': filterItem.filter.id == 1}">Todo</a></li>
+        <li><a ng-click="changeFilter(2)">Finished</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a ng-click="changeFilter(0)">All</a></li> -->
+      </ul>
+    </div>
+  </li>
   <li class="list-group-item row" ng-show="notebook.editing">
     <form ng-submit="doneEditNotebook()">
       <input class="form-control noselect" type="text" ng-model="notebook.title" ng-blur="doneEditNotebook()" autofocus />
@@ -21,7 +42,7 @@
     </div>
   </li>
 
-  <li class="list-group-item row" ng-repeat="(index, task) in tasks">
+  <li class="list-group-item row" ng-repeat="(index, task) in tasks | filter:customFilter">
 
     <div class="col-md-1 col-xs-1">
       <input type="checkbox" class="btn" ng-model="task.done" ng-change="saveTask(index, task)">

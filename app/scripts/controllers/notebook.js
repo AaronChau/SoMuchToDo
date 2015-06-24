@@ -5,6 +5,36 @@ app.controller('NotebookCtrl', function ($scope,  $location, $routeParams, $fire
     Task.setNotebookId($scope.notebookId);
     $scope.tasks = Task.tasks();
 
+    $scope.filterOptions = {
+        filters: [
+            {id : 0, name : 'All'},
+            {id : 1, name : 'Todo'},
+            {id : 2, name : 'Finished'}
+        ]
+    };
+
+    $scope.filterItem = {
+        filter: $scope.filterOptions.filters[0]
+    };
+
+    $scope.changeFilter = function(id) {
+        $scope.filterItem.filter = $scope.filterOptions.filters[id];
+    };
+
+    $scope.customFilter = function(task){
+        var filterID = $scope.filterItem.filter.id;
+        if(filterID === 0){
+            return true;
+        } else if (filterID === 1 && !task.done){
+            return true;
+        } else if (filterID === 2 && task.done){
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+
     User.Notebook.all().$loaded().then(function(notebooks){
         $scope.notebook = notebooks.$getRecord($scope.notebookId);
     }).catch(function(error){
