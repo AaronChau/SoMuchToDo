@@ -1,7 +1,8 @@
 'use strict';
 
-app.controller('NotebookCtrl', function ($scope,  $location, $routeParams, $firebaseObject, Task, User) {
+app.controller('NotebookCtrl', function ($scope,  $location, $routeParams, $firebaseObject, Task, User, $cookies) {
     $scope.notebookId = $routeParams.notebookid;
+    var filterKey = 'ftilerOption_' + $scope.notebookId;
     Task.setNotebookId($scope.notebookId);
     $scope.tasks = Task.tasks();
 
@@ -13,13 +14,23 @@ app.controller('NotebookCtrl', function ($scope,  $location, $routeParams, $fire
         ]
     };
 
-    $scope.filterItem = {
-        filter: $scope.filterOptions.filters[0]
+    // Get the filter id
+    var filterId = $cookies.get(filterKey);
+    if (!filterId) { // if the filter id does not exist
+        filterId = 0;         // set it to 0
+        $cookies.put(filterKey, filterId);
+    }
+    $scope.filterItem = {     // set the current filter.
+        filter: $scope.filterOptions.filters[filterId]
     };
 
     $scope.changeFilter = function(id) {
         $scope.filterItem.filter = $scope.filterOptions.filters[id];
+        $cookies.put(filterKey, id);
     };
+
+
+    $scope.changeFilter(filterId);
 
     $scope.customFilter = function(task){
         var filterID = $scope.filterItem.filter.id;
