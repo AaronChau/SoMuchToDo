@@ -8,13 +8,15 @@
 
 .notebook-title{ 
   display: inline-block;
-  vertical-align: center;
   width: 70%;
 }
 
 .filters {
+  position: absolute;
+  top: 10%;
+  right: 1%;
   display: inline-block;
-  width: 22%;
+  width: 151px;
   vertical-align: top;
 }
 
@@ -44,6 +46,7 @@
 
 body {
   padding: 0;
+  min-width: 480px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
