@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "angular": "^1.3.0",
-    "bootstrap": "3.2.0",
+    "bootstrap": "^3.2.0",
     "angular-animate": "^1.3.0",
     "angular-cookies": "^1.3.0",
     "angular-resource": "^1.3.0",
@@ -16,5 +16,14 @@
     "angular-mocks": "^1.3.0"
   },
   "appPath": "app",
-  "moduleName": "soMuchToDoApp"
+  "moduleName": "soMuchToDoApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.js",
+        "dist/css/bootstrap.css",
+        "less/bootstrap.less"
+      ]
+    }
+  }
 }
